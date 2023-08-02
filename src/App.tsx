@@ -20,6 +20,11 @@ export function App() {
     setInput('')  
   }
 
+  function handleDelete(item: string){
+    const removeTask = tasks.filter( task => task !== item)
+    setTasks(removeTask)
+  }
+
   return (
     <>
      <h1>Lista de tarefas</h1>
@@ -36,6 +41,8 @@ export function App() {
      {tasks.map( (item, index) => (
       <section key={item}>
         <span>{item}</span>
+
+        <button onClick={() => handleDelete(item)}>Excluir</button>
       </section>
      ))}
     </>
