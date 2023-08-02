@@ -34,7 +34,7 @@ export function App() {
      <hr />
 
      {tasks.map( (item, index) => (
-      <section key={index}>
+      <section key={item}>
         <span>{item}</span>
       </section>
      ))}
