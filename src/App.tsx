@@ -31,7 +31,7 @@ export function App() {
   }
 
   function handleSaveEdit(){
-    const findIndexTask = tasks.finIndex( task => task === editTask.task)
+    const findIndexTask = tasks.findIndex( task => task === editTask.task)
     const allTasks = [...tasks]
 
     allTasks[findIndexTask] = input;
@@ -66,7 +66,9 @@ export function App() {
       onChange={ (e) => setInput(e.target.value)}
      />
 
-     <button onClick={handleRegister}>Adicionar tarefa</button>
+     <button onClick={handleRegister}>
+       {editTask.enable ? 'Atualizar tarefa' : 'Adicionar tarefa'}
+     </button>
 
      <hr />
 
