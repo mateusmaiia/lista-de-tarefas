@@ -3,11 +3,7 @@ import { useState } from 'react'
 export function App() {
 
   const [ input, setInput ] = useState('')
-  const [ tasks, setTasks ] = useState([
-    'Estudar React com TypeScrip',
-    'Comprar pao de meio dia',
-    'Estudar ingles a noite'
-  ])
+  const [ tasks, setTasks ] = useState<string[]>([])
 
   const [editTask, setEditTask] = useState({
     enable: false,
