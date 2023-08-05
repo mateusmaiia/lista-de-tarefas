@@ -11,7 +11,11 @@ export function App() {
   })
 
   useEffect( () => {
-    console.log('oi')
+    const tarefasSalvas = localStorage.getItem("@cursoreact")
+
+    if(tarefasSalvas){
+      setTasks(JSON.parse(tarefasSalvas))
+    }
   }, [])
 
   function handleRegister(){
@@ -44,7 +48,7 @@ export function App() {
       task: ''
     })
 
-    localStorage.setItem("@cursoreact", JSON.stringify( [allTasks]))
+    localStorage.setItem("@cursoreact", JSON.stringify(allTasks))
   }
 
   function handleDelete(item: string){
@@ -62,7 +66,6 @@ export function App() {
       enable: true,
       task: item
     })
-
   }
 
   return (
