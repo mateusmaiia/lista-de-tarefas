@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export function App() {
+
+  const inputRef = useRef(null)
 
   const [ input, setInput ] = useState('')
   const [ tasks, setTasks ] = useState<string[]>([])
@@ -75,6 +77,8 @@ export function App() {
       placeholder='Digite o nome da tarefa...' 
       value={input}
       onChange={ (e) => setInput(e.target.value)}
+
+      ref={inputRef}
      />
 
      <button onClick={handleRegister}>
