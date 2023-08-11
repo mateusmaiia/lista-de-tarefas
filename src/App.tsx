@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 export function App() {
 
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const firstRender = useRef(true)
 
   const [ input, setInput ] = useState('')
   const [ tasks, setTasks ] = useState<string[]>([])
@@ -20,6 +21,19 @@ export function App() {
     }
   }, [])
 
+  useEffect( () => {
+      if(firstRender.current){
+        firstRender.current = false;
+        return
+      }
+
+      localStorage.setItem( '@cursoreact', JSON.stringify(tasks))
+  }, [tasks])
+
+  const totalTarefas = useMemo( () => {
+    return tasks.length
+  }, [tasks])
+
   function handleRegister(){
     if(!input){ 
       alert('Preencha o nome da sua tarefa!')   
@@ -35,7 +49,7 @@ export function App() {
     setTasks( [...tasks, input ] )  
     setInput('')  
 
-    localStorage.setItem("@cursoreact", JSON.stringify( [...tasks, input] ))
+    // localStorage.setItem("@cursoreact", JSON.stringify( [...tasks, input] ))
   }
 
   function handleSaveEdit(){
@@ -50,7 +64,7 @@ export function App() {
       task: ''
     })
 
-    localStorage.setItem("@cursoreact", JSON.stringify(allTasks))
+    // localStorage.setItem("@cursoreact", JSON.stringify(allTasks))
   }
 
   function handleDelete(item: string){
@@ -58,7 +72,7 @@ export function App() {
     setTasks(removeTask)
 
     
-    localStorage.setItem("@cursoreact", JSON.stringify(removeTask))
+    // localStorage.setItem("@cursoreact", JSON.stringify(removeTask))
   }
 
   function handleEdit(item: string){
@@ -68,6 +82,8 @@ export function App() {
       enable: true,
       task: item
     })
+    
+    inputRef.current?.focus()
   }
 
   return (
@@ -86,6 +102,8 @@ export function App() {
      </button>
 
      <hr />
+
+     <strong>Você tem o total de {totalTarefas} tarefas</strong>
 
      {tasks.map( (item, index) => (
       <section key={item}>
