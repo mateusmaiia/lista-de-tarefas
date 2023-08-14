@@ -36,7 +36,7 @@ export function App() {
 
   const handleRegister = useCallback( () => {
     if(!input){ 
-      alert('Preencha o nome da sua tarefa!')   
+      alert('Fill in the name of your task')   
       return;
     }
 
